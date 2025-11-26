@@ -1,1 +1,129 @@
+/* about.css - styles for the About block and cards */
+
+/* Container / grid */
+.cards {
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* preserve your grid settings, but make room for a hero variant */
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* try to show hero full-width on small screens and grid on larger screens */
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  grid-gap: 24px;
+}
+
+/* each card */
+.cards > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color, #fff);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+/* Image wrapper (useful when you want a slim band image above the content) */
+.cards .cards-card-image {
+  line-height: 0;
+  width: 100%;
+  /* keep image above the body */
+  order: 0;
+}
+
+/* Body / text area inside the card */
+.cards .cards-card-body {
+  margin: 16px;
+  order: 1;
+  color: var(--text-color, #222);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Title styling */
+.cards .cards-card-title {
+  margin: 16px;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--heading-color, #111);
+}
+
+/* CTA (button-like anchor) */
+.cards .cards-card-cta {
+  display: inline-block;
+  margin: 16px;
+  margin-top: auto; /* push to bottom if card is flexible */
+  padding: 10px 16px;
+  border-radius: 6px;
+  background-color: var(--primary-color, #007bff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  width: fit-content;
+}
+
+/* Card specific helpers */
+.cards-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make images fill width & keep aspect ratio (your original) */
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hero / about special look — if the first card has more text, you might want it spanning columns */
+.cards > ul > li:first-child.hero {
+  grid-column: 1 / -1; /* full width */
+  display: grid;
+  grid-template-columns: 1fr 360px; /* text + aside/cards */
+  gap: 24px;
+  align-items: start;
+}
+
+/* When the first item is hero but the content inside is simple, allow column collapse on small screens */
+@media (max-width: 900px) {
+  .cards > ul {
+    grid-template-columns: 1fr;
+  }
+  .cards > ul > li:first-child.hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small utility tweaks */
+.cards .cards-card-body p {
+  margin: 0 0 12px 0;
+}
+
+/* Some spacing for titles within cards */
+.cards .cards-card-title + .cards-card-body {
+  margin-top: 0;
+}
+
+/* accessible focus for CTA */
+.cards .cards-card-cta:focus {
+  outline: 3px solid rgba(0,123,255,0.25);
+  outline-offset: 2px;
+}
+
+/* Example color tokens — override in a site variables file if needed */
+:root {
+  --primary-color: #0b6efd;
+  --background-color: #ffffff;
+  --text-color: #222222;
+  --heading-color: #0f172a;
+}
 
